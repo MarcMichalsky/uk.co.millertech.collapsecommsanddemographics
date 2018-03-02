@@ -2,7 +2,9 @@
 
 ![Screenshot](images/screenshot.png)
 
-Collapse communication preferences and demographics sections on contact summary screen on page load.
+Collapse communication preferences and demographics sections on contact summary screen. In addition, displays warning icons, age and gender on the collapsed titles. 
+
+Please refer User guide for further details.
 
 The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
@@ -38,7 +40,3 @@ cv en collapsecommsanddemographics
 ## Usage
 
 No special configurations needed.
-
-## Known Issues
-
-(* FIXME *)
