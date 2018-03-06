@@ -17,8 +17,8 @@
             {/foreach}
             {if $is_opt_out}
             <span class="icon privacy-flag" title="No Bulk Emails"></span>
+            {/if}
         </span>
-        {/if}
     </div>
     <div class="crm-summary-comm-pref-block">
         <div class="crm-summary-block" id="communication-pref-block">
@@ -28,15 +28,16 @@
 </div>
 {literal}
     <style>
-        .collapsedcommsanddemos.ccnd-comms .ccnd_demo_extra_content{
+        .collapsedcommsanddemos.ccnd-comms .ccnd_demo_extra_content {
             display: inline-block;
         }
+
         .collapsedcommsanddemos.ccnd-comms .ccnd_demo_extra_content .crm-i,
         .collapsedcommsanddemos.ccnd-comms .ccnd_demo_extra_content .icon.privacy-flag {
             margin: 0 0 0 3px;
             padding: 0;
             color: red;
-            float: none!important;
+            float: none !important;
             vertical-align: middle;
         }
     </style>
@@ -49,17 +50,17 @@
                     var newSigns = '';
                     CRM.$.each(privacy_values, function (index, item) {
                         item = item.trim().toLowerCase();
-                        if (item == 'do not phone') {
+                        if (item == '{/literal}{$ccnd_privacy_options.do_not_phone|lower}{literal}') {
                             newSigns += '<span class="crm-i fa-phone" title="Do Not Phone"></span> ';
-                        } else if (item == 'do not email') {
+                        } else if (item == '{/literal}{$ccnd_privacy_options.do_not_email|lower}{literal}') {
                             newSigns += '<span class="crm-i fa-envelope-o" title="Do Not Email"></span> ';
-                        } else if (item == 'do not mail') {
+                        } else if (item == '{/literal}{$ccnd_privacy_options.do_not_mail|lower}{literal}') {
                             newSigns += '<span class="crm-i fa-file-text-o" title="Do Not Mail"></span> ';
-                        } else if (item == 'do not sms') {
+                        } else if (item == '{/literal}{$ccnd_privacy_options.do_not_sms|lower}{literal}') {
                             newSigns += '<span class="crm-i fa-whatsapp" title="Do Not SMS"></span> ';
-                        } else if (item == 'do not trade') {
+                        } else if (item == '{/literal}{$ccnd_privacy_options.do_not_trade|lower}{literal}') {
                             newSigns += '<span class="crm-i fa-handshake-o" title="Do Not Trade"></span> ';
-                        } else if (item == 'no bulk emails (user opt out)') {
+                        } else if (item == '{/literal}{$ccnd_privacy_options.is_opt_out|lower}{literal}') {
                             newSigns += '<span class="icon privacy-flag" title="No Bulk Emails"></span> ';
                         }
                     });

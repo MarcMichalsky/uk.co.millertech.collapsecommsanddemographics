@@ -156,6 +156,10 @@ function collapsecommsanddemographics_civicrm_pageRun(&$page)
         ));
         CRM_Core_Resources::singleton()->addStyle('.collapsedcommsanddemos { margin-bottom: 10px; }');
 
+        // get privacy options
+        $privacy_options = CRM_Core_SelectValues::privacy();
+        $page->assign('ccnd_privacy_options', $privacy_options);
+
         $is_deceased = $page->get_template_vars('is_deceased');
         if (!$is_deceased) {
             $birthdate = $page->get_template_vars('birth_date');
@@ -167,9 +171,24 @@ function collapsecommsanddemographics_civicrm_pageRun(&$page)
                 $page->assign('ccnd_show_age', $ageStr);
             }
         }
-        $gender = $page->get_template_vars('gender_display');
 
-        if (!empty($gender))
-            $page->assign('ccnd_show_gender_icon', $gender);
+        // gender options
+        $gender_value = $page->get_template_vars('gender_display');
+        if (!empty($gender_value)) {
+            $page->assign('ccnd_show_gender_icon', $gender_value);
+        }
+        // add gender options regardless of gender value to support jquery in inline editing
+        $genderOptions = array();
+        $gender = CRM_Core_PseudoConstant::get('CRM_Contact_DAO_Contact', 'gender_id');
+        foreach ($gender as $key => $var) {
+            // assumes option value 1 and 2 will be male and female
+            if ($key == 2 || strtolower($var) == 'male') {
+                $genderOptions[2] = $var;
+            } else if ($key == 1 || strtolower($var) == 'female') {
+                $genderOptions[1] = $var;
+            }
+        }
+        $page->assign('ccnd_gender_options', $genderOptions);
+
     }
 }
