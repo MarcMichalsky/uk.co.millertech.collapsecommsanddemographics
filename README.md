@@ -24,7 +24,7 @@ install it with the command-line tool [cv](https://github.com/civicrm/cv).
 
 ```bash
 cd <extension-dir>
-cv dl uk.co.millertech.collapsecommsanddemographics@https://github.com/FIXME/uk.co.millertech.collapsecommsanddemographics/archive/master.zip
+cv dl uk.co.millertech.collapsecommsanddemographics@https://github.com/donchamil/uk.co.millertech.collapsecommsanddemographics/archive/master.zip
 ```
 
 ## Installation (CLI, Git)
