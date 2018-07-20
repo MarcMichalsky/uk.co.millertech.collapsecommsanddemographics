@@ -192,3 +192,21 @@ function collapsecommsanddemographics_civicrm_pageRun(&$page)
 
     }
 }
+
+
+/**
+ * Implements hook_civicrm_contactSummaryBlocks().
+ *
+ * @link https://github.com/civicrm/org.civicrm.contactlayout
+ */
+function collapsecommsanddemographics_civicrm_contactSummaryBlocks(&$blocks)
+{
+    // change tpl files
+    foreach ($blocks['core']['blocks'] as $key => &$block) {
+        if ($key == 'Demographics')
+            $block['tpl_file'] = 'CRM/Collapsecommsanddemographics/Page/CollapseDemographics.tpl';
+        else if ($key == 'CommunicationPreferences')
+            $block['tpl_file'] = 'CRM/Collapsecommsanddemographics/Page/CollapseComms.tpl';
+
+    }
+}

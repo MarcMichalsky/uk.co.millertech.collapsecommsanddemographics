@@ -2,6 +2,10 @@
 
 ![Screenshot](images/screenshot.png)
 
+![Screenshot](images/screenshot2.png)
+
+**Compatible with [Shoreditch Theme (org.civicrm.shoreditch)](https://github.com/civicrm/org.civicrm.shoreditch) and [Contact Summary Layout Editor (org.civicrm.contactlayout)](https://github.com/civicrm/org.civicrm.contactlayout)**
+
 Collapse communication preferences and demographics sections on contact summary screen. In addition, displays warning icons, age and gender on the collapsed titles. 
 
 Please refer User guide for further details.
@@ -11,7 +15,9 @@ The extension is licensed under [AGPL-3.0](LICENSE.txt).
 ## Requirements
 
 * PHP v5.4+
-* CiviCRM 4.7+
+* CiviCRM 4.7
+* CiviCRM 5.0
+* CiviCRM 5.3
 
 ## Installation (Web UI)
 
