@@ -44,4 +44,4 @@ cv en collapsecommsanddemographics
 ```
 
 ## Usage
-* Gender icons can be updated in Gender Options settings from the CiviCRM menu – Administer > Systems Settings > Option Groups > Gender (/civicrm/admin/options?gid=3&reset=1)
+* Gender icons can be updated in Gender Options settings from the CiviCRM menu - Administer > Systems Settings > Option Groups > Gender (/civicrm/admin/options?gid=3&reset=1)
