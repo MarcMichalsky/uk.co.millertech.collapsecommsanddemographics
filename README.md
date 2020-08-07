@@ -1,7 +1,9 @@
 # uk.co.millertech.collapsecommsanddemographics
 
-![Screenshot](images/screenshot.png)
+#### Collapsed communication preferences and demographics
+![Screenshot](images/screenshot1.png)  
 
+#### Shoreditch and Contact Summary Layout Editor compatible
 ![Screenshot](images/screenshot2.png)
 
 **Compatible with [Shoreditch Theme (org.civicrm.shoreditch)](https://github.com/civicrm/org.civicrm.shoreditch) and [Contact Summary Layout Editor (org.civicrm.contactlayout)](https://github.com/civicrm/org.civicrm.contactlayout)**
@@ -14,10 +16,8 @@ The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
 ## Requirements
 
-* PHP v5.4+
-* CiviCRM 4.7
+* PHP v7.0+
 * CiviCRM 5.0
-* CiviCRM 5.3
 
 ## Installation (Web UI)
 
@@ -44,5 +44,4 @@ cv en collapsecommsanddemographics
 ```
 
 ## Usage
-
-No special configurations needed.
+* Gender icons can be updated in Gender Options settings from the CiviCRM menu – Administer > Systems Settings > Option Groups > Gender (/civicrm/admin/options?gid=3&reset=1)

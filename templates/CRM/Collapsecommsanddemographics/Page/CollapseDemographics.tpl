@@ -1,8 +1,9 @@
 <div class="collapsedcommsanddemos ccnd-demos crm-collapsible collapsed ui-corner-all">
     <div class="collapsible-title">
-        {ts}Demographics{/ts}<span class="ccnd_demo_extra_content"> <span
-                    class="crm-i {if $ccnd_show_gender_icon == $ccnd_gender_options.2}fa-male{elseif $ccnd_show_gender_icon == $ccnd_gender_options.1}fa-female{/if}"></span>
-            <span class="ccnd-demos-age">{if $ccnd_show_age} {$ccnd_show_age}{/if}</span> </span>
+        {ts}Demographics{/ts}
+        <span class="ccnd_demo_extra_content">
+            {include file="CRM/Collapsecommsanddemographics/DemographicIcons.tpl"}
+        </span>
     </div>
     <div class="crm-summary-demographic-block">
         <div class="crm-summary-block" id="demographic-block">
@@ -11,38 +12,28 @@
     </div>
 </div>
 {literal}
+    <style>
+        #crm-container .collapsedcommsanddemos.ccnd-demos .ccnd_demo_extra_content span.privacy-flag.demography-icon {
+            text-align: center;
+            float: none;
+            position: relative;
+            display: inline-block;
+            width: auto;
+            min-width: 1.5em;
+            height: 1.5em;
+            line-height: 1.5em;
+            vertical-align: middle;
+        }
+
+    </style>
 <script>
-    CRM.$(function () {
-        CRM.$("#demographic-block").on("crmLoad", function (event, data) {
-            var gender_display = CRM.$(".crm-contact-gender_display").text().trim();
-            var birthdate = CRM.$(".crm-contact-birth_date_display").text().trim();
-            var deceased = CRM.$(".crm-contact-deceased_message").text().trim();
-            var deceased_date = CRM.$(".crm-contact-deceased_date_display").text().trim();
-            if (gender_display == '{/literal}{$ccnd_gender_options.2}{literal}') {
-                CRM.$(".ccnd-demos .ccnd_demo_extra_content span.crm-i").removeClass("fa-female").addClass("fa-male");
-            } else if (gender_display == '{/literal}{$ccnd_gender_options.1}{literal}') {
-                CRM.$(".ccnd-demos .ccnd_demo_extra_content span.crm-i").removeClass("fa-male").addClass("fa-female");
-            } else {
-                CRM.$(".ccnd-demos .ccnd_demo_extra_content span.crm-i").removeClass("fa-male fa-female");
-            }
-            if (birthdate != "" && deceased == "" && deceased_date == "") {
-                // remove date suffix
-                var mapObj = {
-                    nd: "",
-                    st: "",
-                    th: "",
-                    rd: ""
-                };
-                birthdate = birthdate.replace(/nd|st|th|rd/gi, function (matched) {
-                    return mapObj[matched];
+    CRM.$(function ($) {
+        CRM.$("#demographic-block").on("crmFormSuccess", function (e) {
+            $(".collapsedcommsanddemos.ccnd-demos .ccnd_demo_extra_content").block();
+            $.get(CRM.url('civicrm/collapsecommsanddemographics/ajax/demographics', {cid: {/literal}{$contactId}{literal}}))
+                .then(function (result) {
+                    $(".collapsedcommsanddemos.ccnd-demos .ccnd_demo_extra_content").unblock().html(result);
                 });
-                var dob = new Date(birthdate);
-                var today = new Date();
-                var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
-                CRM.$(".ccnd-demos-age").text(age);
-            } else {
-                CRM.$(".ccnd-demos-age").text("");
-            }
         });
     });
 </script>

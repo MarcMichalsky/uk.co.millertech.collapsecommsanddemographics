@@ -2,22 +2,39 @@
 
 require_once 'collapsecommsanddemographics.civix.php';
 
+// phpcs:disable
 use CRM_Collapsecommsanddemographics_ExtensionUtil as E;
+
+// phpcs:enable
 
 /**
  * Implements hook_civicrm_config().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_config/
  */
 function collapsecommsanddemographics_civicrm_config(&$config)
 {
     _collapsecommsanddemographics_civix_civicrm_config($config);
+
+    static $configured = FALSE;
+    if ($configured) {
+        return;
+    }
+    $configured = TRUE;
+
+
+    $smarty = CRM_Core_Smarty::singleton();
+    if (!file_exists(Civi::paths()->getPath('[civicrm.root]/CRM/Core/Smarty/plugins/function.privacyFlag.php'))) {
+        // add Core smarty plugin if not there
+        array_push($smarty->plugins_dir, E::path('CRM/Collapsecommsanddemographics/Core/Smarty/Plugins'));
+    }
+    array_push($smarty->plugins_dir, E::path('CRM/Collapsecommsanddemographics/Smarty/Plugins'));
 }
 
 /**
  * Implements hook_civicrm_xmlMenu().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_xmlMenu
  */
 function collapsecommsanddemographics_civicrm_xmlMenu(&$files)
 {
@@ -27,7 +44,7 @@ function collapsecommsanddemographics_civicrm_xmlMenu(&$files)
 /**
  * Implements hook_civicrm_install().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_install
  */
 function collapsecommsanddemographics_civicrm_install()
 {
@@ -37,7 +54,7 @@ function collapsecommsanddemographics_civicrm_install()
 /**
  * Implements hook_civicrm_postInstall().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_postInstall
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_postInstall
  */
 function collapsecommsanddemographics_civicrm_postInstall()
 {
@@ -47,7 +64,7 @@ function collapsecommsanddemographics_civicrm_postInstall()
 /**
  * Implements hook_civicrm_uninstall().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_uninstall
  */
 function collapsecommsanddemographics_civicrm_uninstall()
 {
@@ -57,7 +74,7 @@ function collapsecommsanddemographics_civicrm_uninstall()
 /**
  * Implements hook_civicrm_enable().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_enable
  */
 function collapsecommsanddemographics_civicrm_enable()
 {
@@ -67,7 +84,7 @@ function collapsecommsanddemographics_civicrm_enable()
 /**
  * Implements hook_civicrm_disable().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_disable
  */
 function collapsecommsanddemographics_civicrm_disable()
 {
@@ -77,7 +94,7 @@ function collapsecommsanddemographics_civicrm_disable()
 /**
  * Implements hook_civicrm_upgrade().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_upgrade
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_upgrade
  */
 function collapsecommsanddemographics_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL)
 {
@@ -90,7 +107,7 @@ function collapsecommsanddemographics_civicrm_upgrade($op, CRM_Queue_Queue $queu
  * Generate a list of entities to create/deactivate/delete when this module
  * is installed, disabled, uninstalled.
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_managed
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_managed
  */
 function collapsecommsanddemographics_civicrm_managed(&$entities)
 {
@@ -104,7 +121,7 @@ function collapsecommsanddemographics_civicrm_managed(&$entities)
  *
  * Note: This hook only runs in CiviCRM 4.4+.
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_caseTypes
  */
 function collapsecommsanddemographics_civicrm_caseTypes(&$caseTypes)
 {
@@ -119,7 +136,7 @@ function collapsecommsanddemographics_civicrm_caseTypes(&$caseTypes)
  * Note: This hook only runs in CiviCRM 4.5+. It may
  * use features only available in v4.6+.
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_angularModules
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_angularModules
  */
 function collapsecommsanddemographics_civicrm_angularModules(&$angularModules)
 {
@@ -129,13 +146,57 @@ function collapsecommsanddemographics_civicrm_angularModules(&$angularModules)
 /**
  * Implements hook_civicrm_alterSettingsFolders().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_alterSettingsFolders
  */
 function collapsecommsanddemographics_civicrm_alterSettingsFolders(&$metaDataFolders = NULL)
 {
     _collapsecommsanddemographics_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
+/**
+ * Implements hook_civicrm_entityTypes().
+ *
+ * Declare entity types provided by this module.
+ *
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_entityTypes
+ */
+function collapsecommsanddemographics_civicrm_entityTypes(&$entityTypes)
+{
+    _collapsecommsanddemographics_civix_civicrm_entityTypes($entityTypes);
+}
+
+/**
+ * Implements hook_civicrm_thems().
+ */
+function collapsecommsanddemographics_civicrm_themes(&$themes)
+{
+    _collapsecommsanddemographics_civix_civicrm_themes($themes);
+}
+
+
+/**
+ * Add icon field to Gender Option admin form
+ * @param $formName
+ * @param CRM_Admin_Form_Options $form
+ */
+function collapsecommsanddemographics_civicrm_buildForm($formName, &$form)
+{
+    // if gender option admin page, add icon field
+    // as of 5.28.0 icon field wasn't added by core so add here
+    // don't need to use postProcess as the icon is automatically saved by core
+    if ($formName == 'CRM_Admin_Form_Options' && $form->_action !== CRM_Core_Action::DELETE &&
+        $form->getVar('_gName') === 'gender') {
+        if (!$form->elementExists('icon')) {
+            $form->add('text', 'icon', ts('Icon'), ['class' => 'crm-icon-picker', 'title' => ts('Choose Icon'), 'allowClear' => TRUE]);
+        }
+    }
+}
+
+/**
+ * Update templates for Communication Preferences and Demographics on contact summary screen
+ * @param $page
+ * @throws CRM_Core_Exception
+ */
 function collapsecommsanddemographics_civicrm_pageRun(&$page)
 {
     $pageName = $page->getVar('_name');
@@ -154,41 +215,16 @@ function collapsecommsanddemographics_civicrm_pageRun(&$page)
         CRM_Core_Region::instance('contact-demographic')->add(array(
             'template' => 'CRM/Collapsecommsanddemographics/Page/CollapseDemographics.tpl',
         ));
-        CRM_Core_Resources::singleton()->addStyle('.collapsedcommsanddemos { margin-bottom: 10px; }');
 
-        // get privacy options
-        $privacy_options = CRM_Core_SelectValues::privacy();
-        $page->assign('ccnd_privacy_options', $privacy_options);
+        CRM_Core_Resources::singleton()->addStyle('
+            #crm-container .collapsedcommsanddemos { margin-bottom: 10px; overflow: auto; } 
+            #crm-container .collapsedcommsanddemos.ccnd-demos .ccnd_demo_extra_content { display: inline; box-sizing: border-box; }'
+        );
 
-        $is_deceased = $page->get_template_vars('is_deceased');
-        if (!$is_deceased) {
-            $birthdate = $page->get_template_vars('birth_date');
-            if (!empty($birthdate)) {
-                $age = CRM_Utils_Date::calculateAge($birthdate);
-                $ageStr = '';
-                if (!empty($age['years'])) $ageStr .= $age['years'];
-                else if (!empty($age['months'])) $ageStr .= ' ' . $age['months'];
-                $page->assign('ccnd_show_age', $ageStr);
-            }
+        // fix for versions below 5.27.0 which has background icon for privacy flag
+        if (version_compare(CRM_Utils_System::version(), '5.27.0') === -1) {
+            CRM_Core_Resources::singleton()->addStyle('#crm-container .collapsedcommsanddemos span.privacy-flag { background: none; font-size: 80%; }');
         }
-
-        // gender options
-        $gender_value = $page->get_template_vars('gender_display');
-        if (!empty($gender_value)) {
-            $page->assign('ccnd_show_gender_icon', $gender_value);
-        }
-        // add gender options regardless of gender value to support jquery in inline editing
-        $genderOptions = array();
-        $gender = CRM_Core_PseudoConstant::get('CRM_Contact_DAO_Contact', 'gender_id');
-        foreach ($gender as $key => $var) {
-            // assumes option value 1 and 2 will be male and female
-            if ($key == 2 || strtolower($var) == 'male') {
-                $genderOptions[2] = $var;
-            } else if ($key == 1 || strtolower($var) == 'female') {
-                $genderOptions[1] = $var;
-            }
-        }
-        $page->assign('ccnd_gender_options', $genderOptions);
 
     }
 }

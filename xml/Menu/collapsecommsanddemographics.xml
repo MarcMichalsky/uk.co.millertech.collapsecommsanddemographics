@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<menu>
+    <item>
+        <path>civicrm/collapsecommsanddemographics/ajax/commsandprefs</path>
+        <page_callback>CRM_Collapsecommsanddemographics_Ajax::getCommsAndPrefs</page_callback>
+        <access_arguments>access CiviCRM</access_arguments>
+    </item>
+
+    <item>
+        <path>civicrm/collapsecommsanddemographics/ajax/demographics</path>
+        <page_callback>CRM_Collapsecommsanddemographics_Ajax::getDemographics</page_callback>
+        <access_arguments>access CiviCRM</access_arguments>
+    </item>
+</menu>
